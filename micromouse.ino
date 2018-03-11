@@ -74,18 +74,18 @@ void setup()
 
 void loop()
 {
-float i;
-for (i=0;i<=255;i+=50)
-{
-travel(i, 1000);//moves motors foward at a given float speed for a given time
-long leftread, rightread;
-leftread= encoder_mL.read();
-rightread = encoder_mR.read(); 
-Serial.print("Left = ");
-Serial.println(leftread);
-Serial.print(", Right = ");
-Serial.println(rightread);
-}
+  float i;
+  for (i=0;i<=255;i+=50)
+  {
+    travel(i, 1000);//moves motors foward at a given float speed for a given time
+    long leftread, rightread;
+    leftread= encoder_mL.read();
+    rightread = encoder_mR.read(); 
+    Serial.print("Left = ");
+    Serial.println(leftread);
+    Serial.print(", Right = ");
+    Serial.println(rightread);
+  }
 }
 
 
@@ -99,15 +99,15 @@ void onLight()
 
 void travel (float motorSpeed, float t)//moves  at speed s for time s
 {
-//*** speed  must be between 0 and 255;
-if (motorSpeed>255 || motorSpeed<-255)
-{
-motorSpeed=constrain(motorSpeed,-255,255);
-Serial.println("ERROR: SPEED OUT OF RANGE.");
-}
-motormove(mL_forward,mL_reverse,motorSpeed);
-motormove(mR_forward,mR_reverse,motorSpeed);
-delay(t);
+  //*** speed  must be between 0 and 255;
+  if (motorSpeed>255 || motorSpeed<-255)
+  {
+    motorSpeed=constrain(motorSpeed,-255,255);
+    Serial.println("ERROR: SPEED OUT OF RANGE.");
+  }
+  motormove(mL_forward,mL_reverse,motorSpeed);
+  motormove(mR_forward,mR_reverse,motorSpeed);
+  delay(t);
 }
 
 /*
@@ -125,33 +125,33 @@ return
 
 void emit(float t)//flash LED's for a given time t
 {
-int i;
-for (i=0;i<4;i++)
-{
-digitalWrite(emitters[i],HIGH);
-delay(t);//stay on for time t in ms 
-digitalWrite(emitters[i],LOW);
-delay(t);
-}
+  int i;
+  for (i=0;i<4;i++)
+  {
+    digitalWrite(emitters[i],HIGH);
+    delay(t);//stay on for time t in ms 
+    digitalWrite(emitters[i],LOW);
+    delay(t);
+  }
 }
 
 void turn(float rightspeed,float leftspeed, float t)//turns by spinning motors at different speeds.
 {
-motormove(mL_forward,mL_reverse,rightspeed);
-motormove(mR_forward,mR_reverse,leftspeed);
-delay(t);//in milliseconds
+  motormove(mL_forward,mL_reverse,rightspeed);
+  motormove(mR_forward,mR_reverse,leftspeed);
+  delay(t);//in milliseconds
 }  
 
 void motormove (int pinforward,int pinbackward ,float velocity)//velocity for a single motor
 {
-if (velocity>=0)
+  if (velocity>=0)
   {
-  analogWrite(pinforward,velocity);
-  digitalWrite(pinbackward,LOW);
+    analogWrite(pinforward,velocity);
+    digitalWrite(pinbackward,LOW);
   }
-if (velocity<0)//reverse if motorvelocity is negative
+  if (velocity<0)//reverse if motorvelocity is negative
   {
-  analogWrite(pinbackward,-velocity);//makes value positive
-  digitalWrite(pinforward,LOW);
+    analogWrite(pinbackward,-velocity);//makes value positive
+    digitalWrite(pinforward,LOW);
   }
 }
