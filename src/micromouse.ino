@@ -1,4 +1,5 @@
 #define ENCODER_OPTIMIZE_INTERRUPTS
+#include "../headers/motors.hpp"
 #include <Encoder.h>
 
 void motormove(int, int, float);//foward, backward pin and rotation speed.
